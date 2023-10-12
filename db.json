@@ -1,44 +1,62 @@
 {
-  "transactions": [
+  "playlists": [
     {
       "id": 1,
-      "sender": "Alice",
-      "receiver": "Bob",
-      "amount": 500,
-      "currency": "USD",
-      "date": "2023-10-09T12:30:00Z"
+      "name": "Afro Playlist",
+      "curator": "Curator A",
+      "image": "playlist1.jpg"
     },
     {
       "id": 2,
-      "sender": "Bob",
-      "receiver": "Charlie",
-      "amount": 300,
-      "currency": "EUR",
-      "date": "2023-10-08T14:45:00Z"
+      "name": "RnB Playlist",
+      "curator": "Curator B",
+      "image": "playlist2.jpg"
     },
     {
       "id": 3,
-      "sender": "Alice",
-      "receiver": "David",
-      "amount": 700,
-      "currency": "JPY",
-      "date": "2023-10-07T09:15:00Z"
+      "name": "Rap Playlist",
+      "curator": "Curator C",
+      "image": "playlist3.jpg"
     }
-    
+  
   ],
-  "users": [
+  "albums": [
     {
       "id": 1,
-      "name": "Alice",
-      "balance": 3000,
-      "currency": "USD"
+      "name": "Album 1",
+      "artist": "Artist A",
+      "cover": "album1.jpg"
     },
     {
       "id": 2,
-      "name": "Bob",
-      "balance": 2500,
-      "currency": "EUR"
+      "name": "Album 2",
+      "artist": "Artist B",
+      "cover": "album2.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Album 3",
+      "artist": "Artist C",
+      "cover": "album3.jpg"
+    }
+  ],
+    
+  "songs": [
+    {
+      "id": 1,
+      "title": "Song 1",
+      "artist": "Artist A"
+    },
+    {
+      "id": 2,
+      "title": "Song 2",
+      "artist": "Artist B"
+    },
+    {
+      "id": 3,
+      "title": "Song 3",
+      "artist": "Artist C"
     }
   
-  ]
+  ],
 }

@@ -1,103 +1,80 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // Show the welcome popup on page load
-  showWelcomePopup();
 
-  // Add event listener to the convert button
-  const convertBtn = document.getElementById('convertBtn');
-  convertBtn.addEventListener('click', () => {
-    convertCurrency();
+
+$(document).ready(function(){
+
+  // wow initiation
+  new WOW().init();
+
+  // navigation bar toggle
+  $('#navbar-toggler').click(function(){
+      $('.navbar-collapse').slideToggle(400);
   });
 
-  // Fetch available currencies and populate the dropdowns
-  fetchCurrencies();
-});
-
-async function convertCurrency() {
-  const amount = parseFloat(document.getElementById('amount').value);
-  const fromCurrency = document.getElementById('from').value;
-  const toCurrency = document.getElementById('to').value;
-
-  // Replace YOUR_APP_ID with your actual API key
-  const apiKey = ' fcf06541d5c434e1d0b556a9';
-
-  const apiUrl = 'https://v6.exchangerate-api.com/v6/fcf06541d5c434e1d0b556a9/latest/USD';
-
-  try {
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-
-    const resultElement = document.getElementById('result');
-    if (data[`${fromCurrency}_${toCurrency}`]) {
-      const conversionRate = data[`${fromCurrency}_${toCurrency}`];
-      const convertedAmount = amount * conversionRate;
-      resultElement.textContent = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
-    } else {
-      resultElement.textContent = 'Conversion failed. Please try again.';
-    }
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    const resultElement = document.getElementById('result');
-    resultElement.textContent = 'An error occurred. Please try again later.';
-  }
-}
-
-function showWelcomePopup() {
-  const welcomePopup = document.getElementById('welcomePopup');
-  welcomePopup.style.display = 'flex';
-}
-
-function closeWelcomePopup() {
-  const welcomePopup = document.getElementById('welcomePopup');
-  welcomePopup.style.display = 'none';
-}
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  // Add event listener to the convert button
-  const convertBtn = document.getElementById('convertBtn');
-  convertBtn.addEventListener('click', () => {
-    convertCurrency();
+  // navbar bg change on scroll
+  $(window).scroll(function(){
+      let pos = $(window).scrollTop();
+      if(pos >= 100){
+          $('.navbar').addClass('cng-navbar');
+      } else {
+          $('.navbar').removeClass('cng-navbar');
+      }
   });
 
-  // Fetch available currencies and populate the dropdowns
-  fetchCurrencies();
+  // sample video popup
+  $(document).ready(function() {
+      $('.popup-youtube').magnificPopup({
+          disableOn: 700,
+          type: 'iframe',
+          mainClass: 'mfp-fade',
+          removalDelay: 160,
+          preloader: false,
+  
+          fixedContentPos: false
+      });
+  });
+
+  // team carousel 
+  $('.team .owl-carousel').owlCarousel({
+      loop: true,
+      margin: 10,
+      autoplay: true,
+      dots: true,
+      nav: false,
+      responsiveClass: true,
+      responsive:{
+          0:{
+              items: 1
+          }, 
+          600:{
+              items: 2
+          },
+          1000:{
+              items: 3
+          }
+      }
+  });
+
+  // faq accordion
+  $('.faq-head').each(function(){
+      $(this).click(function(){
+          $(this).next().toggleClass('show-faq-content');
+          let icon = $(this).children('span').children("i").attr('class');
+
+          if(icon == "fas fa-plus"){
+              $(this).children('span').html('<i class = "fas fa-minus"></i>');
+          } else {
+              $(this).children('span').html('<i class = "fas fa-plus"></i>');
+          }
+      });
+  });
+
+  // testimonial carousel 
+  $('.testimonial .owl-carousel').owlCarousel({
+      loop: true,
+      autoplay: true,
+      dots: true,
+      nav: false,
+      items: 1
+  });
+
 });
-
-async function fetchCurrencies() {
-  // Fetch currency data from a free API (replace with your preferred API)
-  const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
-  const data = await response.json();
-
-  const fromCurrencyDropdown = document.getElementById('from');
-  const toCurrencyDropdown = document.getElementById('to');
-
-  // Populate the dropdowns with currency options
-  for (const currency in data.rates) {
-    const option1 = document.createElement('option');
-    const option2 = document.createElement('option');
-    option1.value = currency;
-    option1.textContent = currency;
-    option2.value = currency;
-    option2.textContent = currency;
-
-    fromCurrencyDropdown.appendChild(option1);
-    toCurrencyDropdown.appendChild(option2);
-  }
-}
-
-async function convertCurrency() {
-  const amount = parseFloat(document.getElementById('amount').value);
-  const fromCurrency = document.getElementById('from').value;
-  const toCurrency = document.getElementById('to').value;
-
-  const response = await fetch(`https://api.exchangerate-api.com/v4/convert/${amount}/${fromCurrency}/${toCurrency}`);
-  const data = await response.json();
-
-  const resultElement = document.getElementById('result');
-  if (data.result) {
-    resultElement.textContent = `${amount} ${fromCurrency} = ${data.result} ${toCurrency}`;
-  } else {
-    resultElement.textContent = 'Conversion failed. Please try again.';
-  }
-}
